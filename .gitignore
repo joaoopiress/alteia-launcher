@@ -1,0 +1,15 @@
+# Dependências e resultados de compilação
+node_modules/
+dist/
+release/
+
+# Registos e ficheiros temporários
+*.log
+npm-debug.log*
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Configurações locais de editores
+.vscode/
+.idea/

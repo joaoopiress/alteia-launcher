@@ -1,0 +1,53 @@
+{
+  "name": "game-library",
+  "productName": "ALTEIA",
+  "version": "0.7.1",
+  "description": "ALTEIA: biblioteca unificada dos jogos instalados no PC (Steam, Epic, Riot e .exe).",
+  "author": "Joao Pires",
+  "license": "MIT",
+  "private": true,
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "concurrently -k \"vite\" \"wait-on tcp:5173 && cross-env VITE_DEV_SERVER_URL=http://localhost:5173 electron .\"",
+    "build": "vite build",
+    "start": "vite build && electron .",
+    "dist": "vite build && electron-builder --win nsis",
+    "release": "npm run dist && node scripts/publish-local.cjs"
+  },
+  "build": {
+    "appId": "com.joaopires.gamelibrary",
+    "productName": "ALTEIA",
+    "files": [
+      "dist/**",
+      "electron/**"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "icon": "build/icon.ico",
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "ALTEIA"
+    }
+  },
+  "dependencies": {
+    "@fontsource/silkscreen": "^5.3.0",
+    "@fontsource/vt323": "^5.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.2",
+    "concurrently": "^10.0.6",
+    "cross-env": "^10.1.0",
+    "electron": "^44.9.1",
+    "electron-builder": "^26.15.3",
+    "vite": "^8.3.4",
+    "wait-on": "^9.5.1"
+  }
+}
